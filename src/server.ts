@@ -25,6 +25,6 @@ server.use(router);
 export { server, prisma };
 
 server.listen(3000, () => {
-  console.log("🚀 Servidor rodando em http://localhost:3000");
-  console.log("📘 Swagger disponível em http://localhost:3000/api-docs");
+  console.log("🚀 Server running at http://localhost:3000");
+  console.log("📘 Swagger available in http://localhost:3000/api-docs");
 });

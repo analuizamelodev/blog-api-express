@@ -7,6 +7,6 @@ export const validateTokenService = (token: string) => {
     const decoded = jwt.verify(token, SECRET);
     return { valid: true, decoded };
   } catch (error) {
-    return { valid: false, error: "Token inválido ou expirado" };
+    return { valid: false, error: "Invalid or expired token" };
   }
 };

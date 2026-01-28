@@ -6,42 +6,38 @@ datasource db {
   provider = "postgresql"
 }
 
-model Usuario {
-  id    Int    @id @default(autoincrement())
-  nome  String
-  email String @unique
-  senha String
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
 
   // Um usuário pode ter várias publicações e comentários
-  publicacoes Publicacao[] @relation("UsuarioPublicacoes")
-  comentarios Comentario[] @relation("UsuarioComentarios")
+  publications Publication[] @relation("UserPublications")
+  comments     Comment[]     @relation("UserComments")
 }
 
-model Publicacao {
-  id              Int      @id @default(autoincrement())
-  titulo          String
-  conteudo        String
-  dataCriacao     DateTime @default(now())
-  dataAtualizacao DateTime @updatedAt
+model Publication {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  // Cada publicação pertence a um usuário
-  autor   Usuario @relation("UsuarioPublicacoes", fields: [autorId], references: [id])
-  autorId Int
+  author   User @relation("UserPublications", fields: [authorId], references: [id])
+  authorId Int
 
-  // Uma publicação pode ter vários comentários
-  comentarios Comentario[]
+  comments Comment[]
 }
 
-model Comentario {
-  id          Int      @id @default(autoincrement())
-  conteudo    String
-  dataCriacao DateTime @default(now())
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
 
-  // Cada comentário pertence a uma publicação
-  publicacao   Publicacao @relation(fields: [publicacaoId], references: [id])
-  publicacaoId Int
+  publication   Publication @relation(fields: [publicationId], references: [id])
+  publicationId Int
 
-  // Cada comentário também pertence a um usuário (autor)
-  autor   Usuario @relation("UsuarioComentarios", fields: [autorId], references: [id])
-  autorId Int
+  author   User @relation("UserComments", fields: [authorId], references: [id])
+  authorId Int
 }

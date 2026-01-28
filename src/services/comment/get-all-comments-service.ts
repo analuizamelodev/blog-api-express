@@ -1,6 +1,6 @@
 import { prisma } from "../../server";
 
 export const getAllComments = async () => {
-  const comentarios = await prisma.comentario.findMany();
-  return comentarios;
+  const comments = await prisma.comment.findMany();
+  return comments;
 };

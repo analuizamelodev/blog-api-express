@@ -1,16 +1,16 @@
 import { prisma } from "../../server";
 
 export const createUser = async (
-  nome: string,
+  name: string,
   email: string,
-  senha: string
+  password: string,
 ) => {
-  const novoUsuario = await prisma.usuario.create({
+  const newUser = await prisma.user.create({
     data: {
-      nome,
+      name,
       email,
-      senha,
+      password,
     },
   });
-  return novoUsuario;
+  return newUser;
 };

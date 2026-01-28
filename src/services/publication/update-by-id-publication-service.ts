@@ -2,9 +2,9 @@ import { prisma } from "../../server";
 
 export const updateByIdPublication = async (
   id: number,
-  data: { titulo: string; conteudo: string }
+  data: { title: string; content: string },
 ) => {
-  return await prisma.publicacao.update({
+  return await prisma.publication.update({
     where: { id },
     data,
   });

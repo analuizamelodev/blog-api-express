@@ -1,8 +1,8 @@
 import { prisma } from "../../server";
 
 export const getByIdPublication = async (id: number) => {
-  const publicacao = await prisma.publicacao.findUnique({
+  const publication = await prisma.publication.findUnique({
     where: { id },
   });
-  return publicacao;
+  return publication;
 };

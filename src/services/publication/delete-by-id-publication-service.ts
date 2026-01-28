@@ -1,9 +1,9 @@
 import { prisma } from "../../server";
 
 export const deleteByIdPublication = async (id: number) => {
-  const deletar = await prisma.publicacao.delete({
+  const deletePublication = await prisma.publication.delete({
     where: { id },
   });
 
-  return deletar;
+  return deletePublication;
 };

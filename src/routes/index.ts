@@ -1,31 +1,31 @@
 import { Router } from "express";
-import { cadastrarUsuarioController } from "../controllers/autenticacao/cadastrar-usuario-controller";
-import { logarUsuarioController } from "../controllers/autenticacao/logar-usuario-controller";
-import { publicarController } from "../controllers/publicacao/publicar-controller";
-import { deletarPublicacaoPorIdController } from "../controllers/publicacao/deletar-publicacao-por-id-controller";
-import { buscarTodasPublicacoesController } from "../controllers/publicacao/buscar-todas-publicacoes-controller";
-import { buscarPublicacaoPorIdController } from "../controllers/publicacao/buscar-publicacao-por-id-controller";
-import { atualizarPublicacaoPorIdController } from "../controllers/publicacao/atualizar-publicacao-por-id-controller";
-import { comentarController } from "../controllers/comentario/comentar-controller";
-import { buscarTodosComentariosController } from "../controllers/comentario/buscar-todos-comentarios-controller";
-import { buscarComentarioPorIdController } from "../controllers/comentario/buscar-comentario-por-id-controller";
-import { deletarComentarioPorIdController } from "../controllers/comentario/deletar-comentario-por-id-controller";
+import { registerUserController } from "../controllers/authentication/register-user-controller";
+import { loginUserController } from "../controllers/authentication/login-user-controller";
+import { createPublicationController } from "../controllers/publication/create-publication-controller";
+import { deletePublicationByIdController } from "../controllers/publication/delete-publication-by-id-controller";
+import { searchAllPublicationsController } from "../controllers/publication/search-all-publications-controller";
+import { searchPublicationByIdController } from "../controllers/publication/search-publication-by-id-controller";
+import { updatePublicationByIdController } from "../controllers/publication/update-publication-by-id-controller";
+import { createCommentController } from "../controllers/comment/create-comment-controller";
+import { searchAllCommentsController } from "../controllers/comment/search-all-comments-controller";
+import { searchCommentByIdController } from "../controllers/publication/search-comment-by-id-controller";
+import { deleteCommentByIdController } from "../controllers/comment/delete-comment-by-id-controller";
 
 const router = Router();
 
 /**
  * @swagger
  * tags:
- *   name: Autenticação
- *   description: Endpoints de autenticação
+ *   name: Authentication
+ *   description: Authentication endpoints
  */
 
 /**
  * @swagger
- * /autenticacao/cadastro:
+ * /authentication/registration:
  *   post:
- *     summary: Cadastro de novo usuário
- *     tags: [Autenticação]
+ *     summary: register user
+ *     tags: [Authentication]
  *     requestBody:
  *       required: true
  *       content:
@@ -33,27 +33,27 @@ const router = Router();
  *           schema:
  *             type: object
  *             properties:
- *               nome:
+ *               name:
  *                 type: string
  *                 example: Jondoe Silva
  *               email:
  *                 type: string
  *                 example: usuario@email.com
- *               senha:
+ *               password:
  *                 type: string
- *                 example: senha123
+ *                 example: password123
  *     responses:
  *       201:
- *         description: Usuário cadastrado com sucesso
+ *         description: User successfully registered
  */
-router.post("/autenticacao/cadastro", cadastrarUsuarioController);
+router.post("/authentication/registration", registerUserController);
 
 /**
  * @swagger
- * /autenticacao/login:
+ * /authentication/login:
  *   post:
- *     summary: Login de usuário
- *     tags: [Autenticação]
+ *     summary: User Login
+ *     tags: [Authentication]
  *     requestBody:
  *       required: true
  *       content:
@@ -64,27 +64,27 @@ router.post("/autenticacao/cadastro", cadastrarUsuarioController);
  *               email:
  *                 type: string
  *                 example: usuario@email.com
- *               senha:
+ *               password:
  *                 type: string
- *                 example: senha123
+ *                 example: password123
  *     responses:
  *       200:
- *         description: Login realizado com sucesso
+ *         description: User successfully logged
  */
-router.post("/autenticacao/login", logarUsuarioController);
+router.post("/authentication/login", loginUserController);
 
 /**
  * @swagger
  * tags:
- *   name: Publicação
- *   description: Endpoints de publicação
+ *   name: Publication
+ *   description: Publication endpoints
  */
 /**
  * @swagger
- * /publicacao:
+ * /publication:
  *   post:
- *     summary: Postar uma nova publicação
- *     tags: [Publicação]
+ *     summary: Post a new publication
+ *     tags: [Publication]
  *     requestBody:
  *       required: true
  *       content:
@@ -92,24 +92,24 @@ router.post("/autenticacao/login", logarUsuarioController);
  *           schema:
  *             type: object
  *             properties:
- *               titulo:
+ *               title:
  *                 type: string
- *                 example: Meu primeiro post
- *               conteudo:
+ *                 example: My first publication
+ *               content:
  *                 type: string
- *                 example: Este é o conteúdo da minha primeira publicação.
+ *                 example: This is the content of my first publication.
  *     responses:
  *       201:
- *         description: Publicação criada com sucesso
+ *         description: Publication created successfully
  */
-router.post("/publicacao", publicarController);
+router.post("/publication", createPublicationController);
 
 /**
  * @swagger
- * /publicacao/{id}:
+ * /publication/{id}:
  *   delete:
- *     summary: Remove uma publicação
- *     tags: [Publicação]
+ *     summary: Remove a publication by ID
+ *     tags: [Publication]
  *     parameters:
  *       - in: path
  *         name: id
@@ -118,21 +118,21 @@ router.post("/publicacao", publicarController);
  *           type: integer
  *     responses:
  *       204:
- *         description: Publicação removida com sucesso
+ *         description: Publication deleted successfully
  *       404:
- *         description: Publicação não encontrada
+ *         description: Publication not found
  */
-router.delete("/publicacao/:id", deletarPublicacaoPorIdController);
+router.delete("/publication/:id", deletePublicationByIdController);
 
 /**
  * @swagger
- * /publicacao:
+ * /publication:
  *   get:
- *     summary: Retorna todas as publicações
- *     tags: [Publicação]
+ *     summary: Returns all publications
+ *     tags: [Publication]
  *     responses:
  *       200:
- *         description: Lista de publicações retornada com sucesso
+ *         description: All publications retrieved successfully
  *         content:
  *           application/json:
  *             schema:
@@ -143,35 +143,35 @@ router.delete("/publicacao/:id", deletarPublicacaoPorIdController);
  *                   id:
  *                     type: integer
  *                     example: 1
- *                   titulo:
+ *                   title:
  *                     type: string
- *                     example: Meu primeiro post
- *                   conteudo:
+ *                     example: My first post
+ *                   content:
  *                     type: string
- *                     example: Este é o conteúdo da minha primeira publicação.
- *                   criadoEm:
+ *                     example: This is the content of my first publication.
+ *                   created_at:
  *                     type: string
  *                     format: date-time
  *                     example: 2025-11-11T10:00:00.000Z
  */
-router.get("/publicacao", buscarTodasPublicacoesController);
+router.get("/publication", searchAllPublicationsController);
 
 /**
  * @swagger
- * /publicacao/{id}:
+ * /publication/{id}:
  *   get:
- *     summary: Busca uma publicação pelo ID
- *     tags: [Publicação]
+ *     summary: Search for a publication by ID.
+ *     tags: [Publication]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID da publicação a ser buscada
+ *         description: ID of the publication to be searched
  *     responses:
  *       200:
- *         description: Publicação encontrada com sucesso
+ *         description: Publication found successfully
  *         content:
  *           application/json:
  *             schema:
@@ -180,32 +180,32 @@ router.get("/publicacao", buscarTodasPublicacoesController);
  *                 id:
  *                   type: integer
  *                   example: 1
- *                 titulo:
+ *                 title:
  *                   type: string
- *                   example: Meu primeiro post
- *                 conteudo:
+ *                   example: My first publication
+ *                 content:
  *                   type: string
- *                   example: Este é o conteúdo da minha primeira publicação.
- *                 criadoEm:
+ *                   example: This is the content of my first publication.
+ *                 created_at:
  *                   type: string
  *                   format: date-time
  *                   example: 2025-11-11T10:00:00.000Z
  *       404:
- *         description: Publicação não encontrada
+ *         description: Publication not found
  */
-router.get("/publicacao/:id", buscarPublicacaoPorIdController);
+router.get("/publication/:id", searchPublicationByIdController);
 
 /**
  * @swagger
- * /publicacao/{id}:
+ * /publication/{id}:
  *   put:
- *     summary: Atualiza uma publicação existente
- *     tags: [Publicação]
+ *     summary: Update an existing publication
+ *     tags: [Publication]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID da publicação que será atualizada
+ *         description: ID of the publication to be updated
  *         schema:
  *           type: integer
  *           example: 1
@@ -216,35 +216,35 @@ router.get("/publicacao/:id", buscarPublicacaoPorIdController);
  *           schema:
  *             type: object
  *             properties:
- *               titulo:
+ *               title:
  *                 type: string
- *                 example: Novo título da publicação
- *               conteudo:
+ *                 example: New title of the publication
+ *               content:
  *                 type: string
- *                 example: Novo conteúdo atualizado da publicação.
+ *                 example: New updated content of the publication.
  *     responses:
  *       200:
- *         description: Publicação atualizada com sucesso
+ *         description: Publication updated successfully
  *       404:
- *         description: Publicação não encontrada
+ *         description: Publication not found
  *       500:
- *         description: Erro ao atualizar a publicação
+ *         description: Error updating the publication
  */
-router.put("/publicacao/:id", atualizarPublicacaoPorIdController);
+router.put("/publication/:id", updatePublicationByIdController);
 
 /**
  * @swagger
  * tags:
- *   name: Comentário
- *   description: Endpoints relacionados aos comentários
+ *   name: Comment
+ *   description: Endpoints related to comments
  */
 
 /**
  * @swagger
- * /comentario:
+ * /comment:
  *   post:
- *     summary: Adicionar um novo comentário
- *     tags: [Comentário]
+ *     summary: Add a new comment
+ *     tags: [Comment]
  *     requestBody:
  *       required: true
  *       content:
@@ -252,30 +252,30 @@ router.put("/publicacao/:id", atualizarPublicacaoPorIdController);
  *           schema:
  *             type: object
  *             properties:
- *               publicacaoId:
+ *               publicationId:
  *                 type: integer
  *                 example: 1
- *               usuarioId:
+ *               userId:
  *                 type: integer
  *                 example: 42
- *               conteudo:
+ *               content:
  *                 type: string
- *                 example: "Esse post está incrível!"
+ *                 example: "This is a new comment!"
  *     responses:
  *       201:
- *         description: Comentário criado com sucesso
+ *         description: Comment created successfully
  */
-router.post("/comentario", comentarController);
+router.post("/comment", createCommentController);
 
 /**
  * @swagger
- * /comentario:
+ * /comment:
  *   get:
- *     summary: Retorna todos os comentários
- *     tags: [Comentário]
+ *     summary: Returns all comments
+ *     tags: [Comment]
  *     responses:
  *       200:
- *         description: Lista de comentários retornada com sucesso
+ *         description: List of comments returned successfully
  *         content:
  *           application/json:
  *             schema:
@@ -286,39 +286,39 @@ router.post("/comentario", comentarController);
  *                   id:
  *                     type: integer
  *                     example: 1
- *                   conteudo:
+ *                   content:
  *                     type: string
- *                     example: "Comentário de exemplo"
- *                   usuarioId:
+ *                     example: "Comment example"
+ *                   userId:
  *                     type: integer
  *                     example: 42
- *                   publicacaoId:
+ *                   publicationId:
  *                     type: integer
  *                     example: 10
- *                   criadoEm:
+ *                   createdAt:
  *                     type: string
  *                     format: date-time
  *                     example: 2025-11-11T10:00:00.000Z
  */
-router.get("/comentario", buscarTodosComentariosController);
+router.get("/comment", searchAllCommentsController);
 
 /**
  * @swagger
- * /comentario/{id}:
+ * /comment/{id}:
  *   get:
- *     summary: Busca um comentário pelo ID
- *     tags: [Comentário]
+ *     summary: Search for a comment by ID.
+ *     tags: [Comment]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID do comentário a ser buscado
+ *         description: ID of the comment to be searched
  *         schema:
  *           type: integer
  *           example: 1
  *     responses:
  *       200:
- *         description: Comentário encontrado com sucesso
+ *         description: Comment found successfully
  *         content:
  *           application/json:
  *             schema:
@@ -327,44 +327,44 @@ router.get("/comentario", buscarTodosComentariosController);
  *                 id:
  *                   type: integer
  *                   example: 1
- *                 conteudo:
+ *                 content:
  *                   type: string
- *                   example: "Comentário encontrado com sucesso"
- *                 usuarioId:
+ *                   example: "Comment found successfully"
+ *                 userId:
  *                   type: integer
  *                   example: 42
- *                 publicacaoId:
+ *                 publicationId:
  *                   type: integer
  *                   example: 10
- *                 criadoEm:
+ *                 createdAt:
  *                   type: string
  *                   format: date-time
  *                   example: 2025-11-11T10:00:00.000Z
  *       404:
- *         description: Comentário não encontrado
+ *         description: Comment not found
  */
-router.get("/comentario/:id", buscarComentarioPorIdController);
+router.get("/comment/:id", searchCommentByIdController);
 
 /**
  * @swagger
- * /comentario/{id}:
+ * /comment/{id}:
  *   delete:
- *     summary: Remove um comentário pelo ID
- *     tags: [Comentário]
+ *     summary: Remove a comment by ID
+ *     tags: [Comment]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID do comentário a ser removido
+ *         description: ID of the comment to be removed
  *         schema:
  *           type: integer
  *           example: 1
  *     responses:
  *       204:
- *         description: Comentário removido com sucesso
+ *         description: Comment removed successfully
  *       404:
- *         description: Comentário não encontrado
+ *         description: Comment not found
  */
-router.delete("/comentario/:id", deletarComentarioPorIdController);
+router.delete("/comment/:id", deleteCommentByIdController);
 
 export { router };

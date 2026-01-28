@@ -6,7 +6,7 @@ const swaggerDefinition = {
   info: {
     title: "Blog API",
     version: "1.0.0",
-    description: "Documentação da API com Swagger",
+    description: "Blog API",
   },
   components: {
     securitySchemes: {

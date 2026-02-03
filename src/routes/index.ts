@@ -22,7 +22,7 @@ const router = Router();
 
 /**
  * @swagger
- * /authentication/registration:
+ * /register:
  *   post:
  *     summary: register user
  *     tags: [Authentication]
@@ -46,11 +46,11 @@ const router = Router();
  *       201:
  *         description: User successfully registered
  */
-router.post("/authentication/registration", registerUserController);
+router.post("/register", registerUserController);
 
 /**
  * @swagger
- * /authentication/login:
+ * /login:
  *   post:
  *     summary: User Login
  *     tags: [Authentication]
@@ -71,7 +71,7 @@ router.post("/authentication/registration", registerUserController);
  *       200:
  *         description: User successfully logged
  */
-router.post("/authentication/login", loginUserController);
+router.post("/login", loginUserController);
 
 /**
  * @swagger

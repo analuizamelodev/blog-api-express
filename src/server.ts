@@ -10,11 +10,15 @@ import { PrismaClient } from "@prisma/client";
 
 import { PrismaPg } from "@prisma/adapter-pg";
 
+import cors from "cors";
+
 const pool = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 
 const prisma = new PrismaClient({ adapter: pool });
 
 const server = express();
+
+server.use(cors());
 
 server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

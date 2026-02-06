@@ -13,7 +13,10 @@ export const loginUserController = async (req: Request, res: Response) => {
       expiresIn: "1h",
     });
 
-    return res.json({ token });
+    return res.json({
+      token,
+      user: { id: user.id, name: user.name, email: user.email },
+    });
   }
 
   res.status(401).json({ error: "Invalid credentials" });

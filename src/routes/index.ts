@@ -10,6 +10,7 @@ import { createCommentController } from "../controllers/comment/create-comment-c
 import { searchAllCommentsController } from "../controllers/comment/search-all-comments-controller";
 import { searchCommentByIdController } from "../controllers/publication/search-comment-by-id-controller";
 import { deleteCommentByIdController } from "../controllers/comment/delete-comment-by-id-controller";
+import { searchUsersByNameController } from "../controllers/users/search-users-by-name-controller";
 
 const router = Router();
 
@@ -72,6 +73,40 @@ router.post("/register", registerUserController);
  *         description: User successfully logged
  */
 router.post("/login", loginUserController);
+
+/**
+ * @swagger
+ * /users/search:
+ *   get:
+ *     summary: Search users by name
+ *     tags: [Users]
+ *     parameters:
+ *       - in: query
+ *         name: name
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Users found successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     example: 1
+ *                   name:
+ *                     type: string
+ *                     example: John Doe
+ *                   email:
+ *                     type: string
+ *                     example: user@email.com
+ */
+router.get("/users", searchUsersByNameController);
 
 /**
  * @swagger

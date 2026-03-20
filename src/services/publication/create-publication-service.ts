@@ -11,6 +11,13 @@ export const createPublication = async (
       content,
       authorId,
     },
+    include: {
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
   });
 
   return newPublication;

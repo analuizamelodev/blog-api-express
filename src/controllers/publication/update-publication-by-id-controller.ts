@@ -10,16 +10,11 @@ export const updatePublicationByIdController = async (
   if (!valid || !user) {
     return res.status(401).json({ error: error || "Invalid or missing token" });
   }
-  try {
-    const { id } = req.params;
-    const { title, content } = req.body;
-    const updatedPublication = await updateByIdPublication(Number(id), {
-      title,
-      content,
-    });
-    return res.status(200).json(updatedPublication);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Error updating publication" });
-  }
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const updatedPublication = await updateByIdPublication(Number(id), {
+    title,
+    content,
+  });
+  return res.status(200).json(updatedPublication);
 };

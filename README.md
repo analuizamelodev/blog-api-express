@@ -1,8 +1,8 @@
 # BLOG API EXPRESS
 
-Este repositório possui uma API para um blog, onde os usuários realizam postagens e reagem com comenários. Para o usuário fazer uso da API, será necessário efetuar o cadastro, caso já o possuo, precisará efetuar o login, para que seja gerado o token que o autorize a utilizar ferramentas exclusivas do CRUD para usuários.
+This repository has an API for a blog, where users can post and react with comments. To use the API, users will need to register. If they already have an account, they will need to log in to generate a token that authorizes them to use exclusive CRUD tools.
 
-## Tecnologias
+## Technologies
 
 Node.js
 
@@ -18,99 +18,103 @@ Swagger UI
 
 Docker
 
-## Pré-requisitos
+## Prerequisites
 
 Node.js 18+
 
-npm ou yarn
+npm or yarn
 
-Docker e Docker Compose
+Docker and Docker Compose
 
-## Funcionalidades
+## Features
 
-Servidor Express com rotas organizadas
+Express server with organized routes
 
-TypeScript para tipagem estática
+TypeScript for static typing
 
-Prisma ORM para gerenciamento do banco
+Prisma ORM for database management
 
-Arquivo `.env.example` para configuração de ambiente
+`.env.example` file for environment configuration
 
-Docker para subir o PostgreSQL facilmente
+Docker for easy deployment of PostgreSQL
 
-Linter configurado (ESLint)
+Configured linter (ESLint)
 
-Documentação completa das rotas com Swagger UI
+Complete route documentation with Swagger UI
 
- ## Instruções 
+ ## Instructions
 
-1. Clone o repositório:
+1. Clone the repository:
 ```
 git clone https://github.com/analuizamelodev/api-express.git
 cd api-express
 ```
-2. Instale as dependências:
+2. Install the dependencies:
 ```
 npm install
 ```
-3. Configure o banco de dados do Docker
+3. Configure the Docker database:
 ```
 docker-compose up -d
 ```
-4. Crie um arquivo .env baseado no .env.example:
+4. Create a .env file based on .env.example:
 ```
 DATABASE_URL="postgresql://user:password@localhost:5432/db"
 PORT=3000
 ```
-5. Gere o cliente Prisma:
+5. Generate the Prisma client:
 ```
 npx prisma generate
 ```
-6. Rode as migrações:
+6. Run the migrations:
 ```
 npx prisma migrate dev
 ```
-7. Inicie a aplicação:
+7. Start the application:
 ```
 npm run dev
 ```
 ## Endpoints
 
-O servidor rodará em:
+The server will run on:
 
 ➡️ http://localhost:3000
 
-Swagger disponível em:
+Swagger available at:
 
 ➡️ http://localhost:3000/api-docs
 
-Os endpoints seguem o padrão REST e são versionados:
+The endpoints follow the REST standard and are versioned:
 
-## Autenticação
+## Authentication
 
-`POST	/autenticacao/cadastro`	Cadastra novo usuário
+`POST /authentication/registration` Registers a new user
 
-`POST	/autenticacao/login`	Login e criação de token JWT
+`POST /authentication/login` Login and JWT token creation
 
-## Publicação
+## Publication
 
-`POST	/publicacao`	- Criar publicação
+`POST /publication` - Create publication
 
-`GET	/publicacao` -	Buscar todas publicações
+`GET /publication` - Search for all publications
 
-`GET	/publicacao/{id}` - Buscar publicação por ID
+`GET /publication/{id}` - Search for publications by ID
 
-`PUT	/publicacao/{id}`	- Atualizar publicação
+`PUT /publication/{id}` - Update publication
 
-`DELETE	/publicacao/{id}` - Remover publicação
+`DELETE /publication/{id}` - Remove publication
 
-## Comentários
+## Comments
 
-`POST	/comentario`	- Criar comentário
+`POST /comment` - Create comment
 
-`GET	/comentario`	- Buscar todos
+`GET /comment` - Search for all
 
-`GET	/comentario/{id}`	- Buscar por ID
+`GET /comment/{id}` - Search by ID
 
-`DELETE	/comentario/{id}`	- Deletar comentário
+`DELETE /comment/{id}` - Delete comment
 
+## Author
+
+Developed by Ana Luiza Melo
+GitHub: https://github.com/analuizamelodev

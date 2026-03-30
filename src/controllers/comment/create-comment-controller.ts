@@ -4,10 +4,18 @@ import { getUserFromToken } from "../../utils/get-user-from-token";
 
 export const createCommentController = async (req: Request, res: Response) => {
   const { valid, error, user } = getUserFromToken(req);
+
   if (!valid || !user) {
     return res.status(401).json({ error: error || "Invalid or missing token" });
   }
-  const { publicationId, userId, content } = req.body;
-  const comment = await createComment(content, userId, publicationId);
+
+  const { publicationId, content } = req.body;
+
+  const comment = await createComment(
+    content,
+    user.id, 
+    publicationId
+  );
+
   return res.status(201).json(comment);
 };

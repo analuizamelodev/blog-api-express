@@ -5,8 +5,8 @@ export const getAllPublications = async () => {
     include: {
       author: {
         select: {
+          id: true, 
           name: true,
-          email: true,
         },
       },
     },

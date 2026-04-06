@@ -1,7 +1,9 @@
+import { de } from "zod/locales";
 import { prisma } from "../../server";
 
 export const deleteByIdComment = async (id: number) => {
-  await prisma.comment.delete({
+  const deleted = await prisma.comment.delete({
     where: { id },
   });
+  return deleted;
 };

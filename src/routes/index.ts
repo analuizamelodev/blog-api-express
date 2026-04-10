@@ -8,9 +8,10 @@ import { searchPublicationByIdController } from "../controllers/publication/sear
 import { updatePublicationByIdController } from "../controllers/publication/update-publication-by-id-controller";
 import { createCommentController } from "../controllers/comment/create-comment-controller";
 import { searchAllCommentsController } from "../controllers/comment/search-all-comments-controller";
-import { searchCommentByIdController } from "../controllers/publication/search-comment-by-id-controller";
+import { searchCommentByIdController } from "../controllers/comment/search-comment-by-id-controller";
 import { deleteCommentByIdController } from "../controllers/comment/delete-comment-by-id-controller";
 import { searchUsersByNameController } from "../controllers/users/search-users-by-name-controller";
+import { searchAllPublicationsByIdController } from "../controllers/publication/search-all-publications-by-id-controller";
 
 const router = Router();
 
@@ -190,6 +191,54 @@ router.delete("/publication/:id", deletePublicationByIdController);
  *                     example: 2025-11-11T10:00:00.000Z
  */
 router.get("/publication", searchAllPublicationsController);
+
+/**
+ * @swagger
+ * /publication/user/{userId}:
+ *   get:
+ *     summary: Returns all publications by user ID
+ *     tags: [Publication]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the user to search publications
+ *     responses:
+ *       200:
+ *         description: Publications retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     example: 1
+ *                   title:
+ *                     type: string
+ *                     example: My first publication
+ *                   content:
+ *                     type: string
+ *                     example: This is the content of my first publication.
+ *                   author:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       name:
+ *                         type: string
+ *                         example: John Doe
+ *       400:
+ *         description: Invalid user ID
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/publication/user/:userId", searchAllPublicationsByIdController);
 
 /**
  * @swagger
